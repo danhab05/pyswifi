@@ -4,7 +4,7 @@
 <h4> Installation: </h4>
 
 ```bash 
-  git clone https://github.com/Snowy-27/Pywifi/
+  git clone https://github.com/Snowy-27/pyswifi
   cd Pywifi
   sudo apt install aircrack-ng metasploit-framework sqlmap
   python3 Main.py
