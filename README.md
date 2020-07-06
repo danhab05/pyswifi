@@ -1,4 +1,4 @@
-<h1> # Pywifi </h1>
+<h1> # pyswifi </h1>
 <h6> Cet unique script vous permet d'automatiser certain outils de base de Kali linux, Parrot sec ou autre </h6>
 
 <h4> Installation: </h4>
